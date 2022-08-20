@@ -1,0 +1,25 @@
+1. wszystkie budynki nie są wiatą
+UPDATE budynki SET budynki.wiata = 0 WHERE TERYT = '260104_4' AND IDOBR = 1 AND STATUS IN (0,1)
+
+2. stan użytkowania budynku dla wszystkich "Budynek oddany do użytkowania w całości"
+UPDATE budynki SET budynki.stanuzb = 45 WHERE TERYT = '260104_4' AND IDOBR = 1 AND STATUS IN (0,1)
+
+2.1 budynki w budowie
+select * from budynki where status in (0,1) and statbud = 5
+
+
+3. dla wszystkich budynków przypisać powierzchnię z obmiarów równą powierzchni zabudowy
+UPDATE budynki SET budynki.peuobm = budynki.pew WHERE TERYT = '260104_4' AND IDOBR = 1 AND STATUS IN (0,1)
+
+4. przypisać wszystkim działkom rejon statystyczny
+najpierw wprowadzić do słownika 'Rejony' nr rejonu statystycznego, a potem przypisać działkom uid z tabeli 'rejonstat'
+UPDATE dzialka SET idr = 1 WHERE status in (0,1)
+
+5. dokładność powierzchni działek w m2
+update dzialka set m2 = 1 where TERYT = '120202_4' AND IDOBR = 1 and status in (0,1)
+
+6. działki nieobjęte forma ochrony przyrody
+update dzialka set ochrona_przyr = 0 where teryt='260104_4' and idobr = 1 and status in (0,1)
+
+7. działki nie są terenem zamkniętym
+update dzialka set teren_zamkniety = 0 where teryt='260104_4' and idobr = 1 and status in (0,1)
